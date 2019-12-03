@@ -1,0 +1,20 @@
+function [V_lin, V_ang] = puma_speed(t, dt)
+    [H01, H02, H03, H04, H05, H06] = puma_FK(t);
+    %V_ang1 = zeros(3,6);
+    P0 = [0 0 0]';
+    P1 = H01(1:3,4);
+    P2 = H02(1:3,4);
+    P3 = H03(1:3,4);
+    P4 = H04(1:3,4);
+    P5 = H05(1:3,4);
+    P6 = H06(1:3,4);
+    V_lin1(:,1) = cross([0 0 1],(P6-P0));
+    V_lin1(:,2) = cross(H01(1:3,3),(P6-P1));
+    V_lin1(:,3) = cross(H02(1:3,3),(P6-P2));
+    V_lin1(:,4) = cross(H03(1:3,3),(P6-P3));
+    V_lin1(:,5) = cross(H04(1:3,3),(P6-P4));
+    V_lin1(:,6) = cross(H05(1:3,3),(P6-P5));
+    V_ang1 = [[0 0 1]' H01(1:3,3) H02(1:3,3) H03(1:3,3) H04(1:3,3) H05(1:3,3)];
+    V_ang = V_ang1*dt';
+    V_lin = V_lin1*dt';
+end
