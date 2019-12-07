@@ -14,7 +14,7 @@ function result = check_edge(p1, p2, p3, tr)
     for i = 1:size(tr(:,1))
         tmp = ((p2(2)-p1(2)) / (p2(1)-p1(1))) * (tr(i,1)-p1(1)) + p1(2) - tr(i,2);
         
-        if ((p2(2)-p1(2)) / (p2(1)-p1(1))) * (tr(i,1)-p1(1)) + p1(2) - tr(i,2) >= 0
+        if ((p2(2)-p1(2)) / (p2(1)-p1(1))) * (tr(i,1)-p1(1)) + p1(2) - tr(i,2) > 0
             result(m) = 1;
         end
         
